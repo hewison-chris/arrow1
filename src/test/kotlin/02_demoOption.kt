@@ -126,17 +126,18 @@ object OptionsTests {
             }.unsafeRunSync()
         )
 
-//    @Test
-//    fun `14 MONAD (with none in chain)`() =
-//        assertEquals(
-//            6,
-//            binding {
-//                val (x) = none<Int>()
-//                val (y) = Some(1 + x)
-//                val (z) = Some(1 + y)
-//                y + z
-//            }.unsafeRunSync()
-//        )
+    @Test
+    fun `14 MONAD (with none in chain)`() =
+        assertEquals(
+            6,
+            binding {
+//                val (x) = none<Int>() // TODO: fix
+                val (x) = Some(1)
+                val (y) = Some(1 + x)
+                val (z) = Some(1 + y)
+                x + y + z
+            }.unsafeRunSync()
+        )
 
     @Test
     fun `14 Applicative example`() {
