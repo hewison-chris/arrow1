@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 
 object OptionsTests {
 
-    fun parseInt(s: String): Option<Int> = try {
+    private fun parseInt(s: String): Option<Int> = try {
         Some(s.toInt())
     } catch (e: Exception) {
         None

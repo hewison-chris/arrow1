@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 
 object EitherTests {
 
-    fun divTwoNumbers(x: Int, y: Int): Either<Int, Double> {
+    private fun divTwoNumbers(x: Int, y: Int): Either<Int, Double> {
         val result: Double = x.toDouble().div(y)
         return if (result.rem(1.0) == 0.0) {
             Either.left(result.toInt())
@@ -31,7 +31,7 @@ object EitherTests {
         )
 
     // Just for fun using lambda function signature
-    fun divide10By(): (Int) -> Either<String, Int> =
+    private fun divide10By(): (Int) -> Either<String, Int> =
         { if (it == 0) Either.left("Can not divide by zero") else Either.right(10.div(it)) }
 
     @Test
@@ -57,20 +57,20 @@ object EitherTests {
         object NoZeroReciprocal : Error()
     }
 
-    fun parse(s: String): Either<Error, Int> =
+    private fun parse(s: String): Either<Error, Int> =
         if (s.matches(Regex("-?[0-9]+"))) Either.Right(s.toInt())
         else Either.Left(Error.NotANumber)
 
-    fun reciprocal(i: Int): Either<Error, Double> =
+    private fun reciprocal(i: Int): Either<Error, Double> =
         if (i == 0) Either.Left(Error.NoZeroReciprocal)
         else Either.Right(1.0 / i)
 
-    fun stringify(d: Double): String = d.toString()
+    private fun stringify(d: Double): String = d.toString()
 
-    fun magic(s: String): Either<Error, String> =
+    private fun magic(s: String): Either<Error, String> =
         parse(s).flatMap { reciprocal(it) }.map { stringify(it) }
 
-    fun doMagic(s: String): String = magic(s).let {
+    private fun doMagic(s: String): String = magic(s).let {
         when (it) {
             is Either.Left -> when (it.a) {
                 is Error.NotANumber -> "Not a number!"

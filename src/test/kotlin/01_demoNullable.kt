@@ -3,7 +3,7 @@ import kotlin.test.assertEquals
 
 object NullableTests {
 
-    fun parseInt(s: String): Int? = try {
+    private fun parseInt(s: String): Int? = try {
         s.toInt()
     } catch (e: Exception) {
         null
