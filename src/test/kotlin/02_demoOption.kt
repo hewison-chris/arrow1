@@ -140,7 +140,7 @@ object OptionsTests {
         )
 
     @Test
-    fun `14 Applicative example`() {
+    fun `14 Applicative example 1`() {
 
         fun profileService(): Option<String> = Some("Alfredo Lambda")
         fun phoneService(): Option<Int> = Some(55555555)
@@ -154,4 +154,10 @@ object OptionsTests {
         }
         applicative()
     }
+
+//    @Test
+//    fun `15 Applicative example 2`() {
+//        val l = listOf(Option(1), Option(2), Option(3))
+//            .sequence(Option.applicative())
+//    }
 }
