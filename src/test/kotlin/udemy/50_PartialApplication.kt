@@ -1,19 +1,21 @@
+package udemy
+
 import org.testng.annotations.Test
 import kotlin.test.assertEquals
 
-object FunctionCompositionTests {
+object FunctionPartialApplication {
 
     // partial application
     private fun <T1, T2, R> ((T1, T2) -> R).partial1(t1: T1): (T2) -> R = { t2 -> this.invoke(t1, t2) }
 
-    private fun concat(a:String, b: String): String = a + b
+    private fun concat(a: String, b: String): String = a + b
 
     private val prependedWithA = ::concat.partial1("A")
 
     // create curried function for two inputs
     private fun <T1, T2, R> ((T1, T2) -> R).curried(): (T1) -> (T2) -> R = { t1 -> { t2 -> this(t1, t2) } }
 
-    private val concatLambda: (String, String) -> String = { a,b -> a + b } // Same as ::concat
+    private val concatLambda: (String, String) -> String = { a, b -> a + b } // Same as ::concat
 
     private val prependedWithB = concatLambda.partial1("B")
 
@@ -53,10 +55,17 @@ object FunctionCompositionTests {
         )
 
     @Test
-    fun `06 show concat using curry`() =
+    fun `06 show concat using curry with use of func ref`() =
         assertEquals(
             "ab",
             ::concat.curried()("a")("b")
+        )
+
+    @Test
+    fun `06 show concat using curry with use of lambda instead of func ref`() =
+        assertEquals(
+            "ab",
+            { a: String, b: String -> concat(a, b) }.curried()("a")("b")
         )
 
 }

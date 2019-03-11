@@ -1,3 +1,5 @@
+package arrow
+
 import arrow.core.*
 import arrow.effects.instances.io.monad.binding
 import arrow.instances.option.applicative.applicative

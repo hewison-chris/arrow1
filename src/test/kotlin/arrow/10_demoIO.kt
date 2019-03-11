@@ -1,7 +1,12 @@
+package arrow
+
 import arrow.core.Either
 import arrow.core.Try
 import arrow.core.getOrElse
 import arrow.effects.IO
+import arrow.effects.instances.io.effect.toIO
+import arrow.effects.instances.io.monad.monad
+import arrow.effects.typeclasses.seconds
 import org.testng.annotations.Test
 import kotlin.test.assertEquals
 
@@ -62,5 +67,14 @@ object IOTests {
         defer.runAsync { cb: Either<Throwable, Unit> ->
             cb.fold({ IO { println(it.localizedMessage) } }, { IO { println("Never ever") } })
         }.unsafeRunSync()
+    }
+
+    @Test
+    fun `05 Io binding`() {
+        IO.monad().binding {
+            IO.just("Hello")
+            IO.just("World")
+        }.toIO().unsafeRunTimed(1.seconds)
+            .let { println(it) }
     }
 }

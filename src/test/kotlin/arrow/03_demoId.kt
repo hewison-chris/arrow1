@@ -1,3 +1,5 @@
+package arrow
+
 import arrow.core.Id
 import arrow.core.value
 import arrow.instances.id.monad.monad

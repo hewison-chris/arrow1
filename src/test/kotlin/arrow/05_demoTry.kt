@@ -1,3 +1,5 @@
+package arrow
+
 import arrow.core.Try
 import arrow.core.orNull
 import org.testng.annotations.Test
