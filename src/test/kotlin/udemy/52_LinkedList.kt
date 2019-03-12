@@ -125,6 +125,7 @@ class DemoLinkedList {
             is Cons -> f(head).append(tail.flatMap(f) )
         }
 
+// Imperative way would be:-
 //    private fun linkedChars(s: String): LinkedList<Char> {
 //        var chars: LinkedList<Char> = Nil
 //        s.map { chars = chars.add(it) }
@@ -132,7 +133,6 @@ class DemoLinkedList {
 //    }
 
     private fun linkedChar(s: String): LinkedList<Char> = s.fold<LinkedList<Char>>(Nil) { acc, c -> acc.add(c) }
-
 
     @Test
     fun `07 using flatMap`() {
