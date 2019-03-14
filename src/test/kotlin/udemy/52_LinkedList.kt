@@ -67,7 +67,7 @@ class DemoLinkedList {
         assertEquals(listOf(1, 2, 3), intList)
     }
 
-    private tailrec fun <T : Any, R : Any> LinkedList<T>.map(f: (T) -> R): LinkedList<R> =
+    private fun <T : Any, R : Any> LinkedList<T>.map(f: (T) -> R): LinkedList<R> =
         when (this) {
             is Nil -> Nil
             is Cons -> Cons(f(head), tail.map(f))

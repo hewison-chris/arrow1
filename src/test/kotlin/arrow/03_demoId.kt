@@ -43,15 +43,18 @@ object IdTests {
         )
     }
 
-//    inline fun <reified F> add3(n: Int, A: Applicative<F> = applicative()): Kind<F, Int> = A.just(n + 3)
-//
-//    @Test
-//    fun `03 use in `() {
-//        assertEquals(
-//            4,
-//            add3<ForId>(1).value()
-//        )
-//    }
-
+    @Test
+    fun `04 additional using Monad binding with `() {
+        val id1: Id<Int> = Id.just(1)
+        val id2: Id<Int> = Id.just(2)
+        assertEquals(
+            3,
+            Id.monad().binding {
+                val one = id1.bind()
+                val two = id2.bind()
+                one + two
+            }.value()
+        )
+    }
 
 }

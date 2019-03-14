@@ -55,10 +55,10 @@ object OptionsTests {
     @Test
     fun `06 flatmap values`() =
         assertEquals(
-            100,
+            123,
             parseInt("1")
-                .flatMap { parseInt(it.toString() + "0") }
-                .flatMap { parseInt(it.toString() + "0") }
+                .flatMap { parseInt(it.toString() + "2") }
+                .flatMap { parseInt(it.toString() + "3") }
                 .orNull()
         )
 
@@ -131,13 +131,12 @@ object OptionsTests {
     @Test
     fun `14 MONAD (with none in chain)`() =
         assertEquals(
-            6,
+            3,
             binding {
-//                val (x) = none<Int>() // TODO: fix
                 val (x) = Some(1)
-                val (y) = Some(1 + x)
-                val (z) = Some(1 + y)
-                x + y + z
+                none<Int>()
+                val (y) = Some(2)
+                x + y
             }.unsafeRunSync()
         )
 
@@ -157,9 +156,4 @@ object OptionsTests {
         applicative()
     }
 
-//    @Test
-//    fun `15 Applicative example 2`() {
-//        val l = listOf(Option(1), Option(2), Option(3))
-//            .sequence(Option.applicative())
-//    }
 }

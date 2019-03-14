@@ -29,16 +29,20 @@ object FunctionCompositionTests {
     }
 
     @Test
-    fun `03 show benefit when using map`() {
+    fun `03 show benefit when using compose to replace multiple maps`() {
+        val expected = listOf("1.0","2.0","3.0")
         val res = Double::toString.compose(Int::toDouble).compose(String::length)
         assertEquals(
-            listOf("1.0","2.0","3.0"),
+            expected,
             listOf("a", "ab", "abc").map(res)
         )
         // Instead of
         assertEquals(
-            listOf("1.0","2.0","3.0"),
-            listOf("a", "ab", "abc").map(String::length).map(Int::toDouble).map(Double::toString)
+            expected,
+            listOf("a", "ab", "abc")
+                .map(String::length)
+                .map(Int::toDouble)
+                .map(Double::toString)
         )
     }
 

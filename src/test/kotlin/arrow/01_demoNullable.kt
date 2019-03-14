@@ -12,28 +12,28 @@ object NullableTests {
     }
 
     @Test
-    fun `01 actual value using orNull`() =
+    fun `01 actual non null value`() =
         assertEquals(
             1,
             parseInt("1")
         )
 
     @Test
-    fun `02 null when None using orNull`() =
+    fun `02 when null`() =
         assertEquals(
             null,
             parseInt("a")
         )
 
     @Test
-    fun `03 actual value using getOrElse`() =
+    fun `03 actual value giving default`() =
         assertEquals(
             2,
             parseInt("2") ?: -1
         )
 
     @Test
-    fun `04 default when empty using getOrElse`() =
+    fun `04 use default when null`() =
         assertEquals(
             -1,
             parseInt("") ?: -1

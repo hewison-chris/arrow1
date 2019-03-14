@@ -1,7 +1,8 @@
 package arrow
 
-import arrow.core.Try
-import arrow.core.orNull
+import arrow.core.*
+import arrow.instances.`try`.applicative.applicative
+import arrow.instances.`try`.applicativeError.handleError
 import org.testng.annotations.Test
 import kotlin.test.assertEquals
 
@@ -14,11 +15,13 @@ object TryTests {
     }
 
     @Test
-    fun `01 show use of Try when success`() =
+    fun `01 show use of Try when success`() {
+        val parseToIntResult: Try<Int> = parseToInt("2")
         assertEquals(
             2,
-            parseToInt("2").orNull()
+            parseToIntResult.orNull()
         )
+    }
 
     @Test
     fun `02 show use of Try when fail`() =
@@ -27,11 +30,21 @@ object TryTests {
             parseToInt("a").orNull()
     )
 
-//    @Test
-//    fun `03 show use of Try when tupled`() =
-//        assertEquals(
-//            null,
-//            parseToInt("1"), parseToInt("2") .orNull()
-//        )
+    @Test
+    fun `03 show use of Try when handling failure`() {
+        val handleError: Try<Int> = parseToInt("a").handleError { 0 }
+        assertEquals(
+            0,
+            handleError.orNull()
+        )
+    }
+
+    @Test   // Applicative
+    fun `04 show use of Try when tupled`() {
+        val res: Try<Tuple2<Int, Int>> = Try.applicative().tupled(parseToInt("1"), parseToInt("2")).fix()
+        assertEquals(
+            Tuple2(1, 2), res.orNull()
+        )
+    }
 
 }

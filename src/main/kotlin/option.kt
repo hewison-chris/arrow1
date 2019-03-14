@@ -21,8 +21,6 @@ fun main() {
     println(tryDivide(4,2))
     println(tryDivide(4,0))
     
-//    println(zero + one)
-//    println(one / zero)
 }
 
 // Will throw if q is 0
@@ -32,6 +30,6 @@ fun partialDivide(p: Int, q: Int) = p / q
 fun pureDivide(p: Int, q: Int): Option<Int> =
     if (q != 0) Option.just(p / q) else Option.empty()
 
-// Will return empty if q is 0
+// Will return throwable in Failure inside of Try if q is 0
 fun tryDivide(p: Int, q: Int): Try<Int> =
     Try.invoke { p / q }
