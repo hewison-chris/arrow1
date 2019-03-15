@@ -1,8 +1,7 @@
 package arrow
 
 import arrow.core.*
-import arrow.instances.`try`.applicative.applicative
-import arrow.instances.`try`.applicativeError.handleError
+import arrow.core.extensions.`try`.applicative.applicative
 import org.testng.annotations.Test
 import kotlin.test.assertEquals
 

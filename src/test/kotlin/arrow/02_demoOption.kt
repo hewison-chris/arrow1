@@ -1,8 +1,8 @@
 package arrow
 
 import arrow.core.*
-import arrow.effects.instances.io.monad.binding
-import arrow.instances.option.applicative.applicative
+import arrow.core.extensions.option.applicative.applicative
+import arrow.effects.extensions.io.fx.fx
 import org.testng.annotations.Test
 import kotlin.test.assertEquals
 
@@ -120,7 +120,7 @@ object OptionsTests {
     fun `13 MONAD (Computing over dependent values ignoring absence)`() =
         assertEquals(
             "a2a:2",
-            binding {
+            fx {
                 val (a) = Some("a")
                 val (b) = Some(2)
                 val (c) = Some("$a:$b")
@@ -132,7 +132,7 @@ object OptionsTests {
     fun `14 MONAD (with none in chain)`() =
         assertEquals(
             3,
-            binding {
+            fx {
                 val (x) = Some(1)
                 none<Int>()
                 val (y) = Some(2)

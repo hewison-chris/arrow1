@@ -2,7 +2,7 @@ import arrow.core.Option
 import arrow.core.Try
 import arrow.core.getOrElse
 
-fun main() {
+private fun main() {
     val zero: Option<Int> = Option.just(0)
     val one: Option<Int> = Option.just(1)
     val none:Option<Int> = Option.empty()
