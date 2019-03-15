@@ -3,20 +3,20 @@ import arrow.effects.extensions.io.applicativeError.handleErrorWith
 import arrow.effects.extensions.io.fx.fx
 import arrow.effects.fix
 
-fun mainIO(): IO<String> =
+private fun mainIO(): IO<String> =
     fx {
         first()
     second()
     }.unsafeRunSync()
 
-fun mainIO2(): IO<Any> =
+private fun mainIO2(): IO<Any> =
     fx {
         first()
     second()
     }.attempt().handleErrorWith { IO.just("Failed") }.fix()
 
-fun first(): IO<String> = IO.just("first called")
-fun second(): IO<String> = IO.just("second called")
+private fun first(): IO<String> = IO.just("first called")
+private fun second(): IO<String> = IO.just("second called")
 
 private fun main() {
     println(mainIO().unsafeRunSync())

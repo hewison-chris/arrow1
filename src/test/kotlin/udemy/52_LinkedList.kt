@@ -82,7 +82,7 @@ class DemoLinkedList {
         )
     }
 
-    private tailrec fun <T : Any> LinkedList<T>.filter(f: (T) -> Boolean): LinkedList<T> =
+    private fun <T : Any> LinkedList<T>.filter(f: (T) -> Boolean): LinkedList<T> =
         when (this) {
             is Nil -> Nil
             is Cons -> if (f(head)) Cons(head, tail.filter(f)) else tail.filter(f)
