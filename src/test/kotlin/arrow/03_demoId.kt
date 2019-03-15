@@ -1,8 +1,8 @@
 package arrow
 
 import arrow.core.Id
+import arrow.core.extensions.id.fx.fx
 import arrow.core.value
-import arrow.instances.id.monad.monad
 import org.testng.annotations.Test
 import kotlin.test.assertEquals
 
@@ -35,7 +35,7 @@ object IdTests {
         val id2: Id<Int> = Id.just(2)
         assertEquals(
             3,
-            Id.monad().binding {
+            fx {
                 val one = id1.bind()
                 val two = id2.bind()
                 one + two
@@ -49,7 +49,7 @@ object IdTests {
         val id2: Id<Int> = Id.just(2)
         assertEquals(
             3,
-            Id.monad().binding {
+            fx {
                 val one = id1.bind()
                 val two = id2.bind()
                 one + two

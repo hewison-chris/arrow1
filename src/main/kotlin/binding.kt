@@ -1,18 +1,16 @@
 import arrow.effects.IO
+import arrow.effects.extensions.io.applicativeError.handleErrorWith
+import arrow.effects.extensions.io.fx.fx
 import arrow.effects.fix
-import arrow.effects.handleErrorWith
-import arrow.effects.instances.io.monad.binding
-import arrow.effects.instances.io.monad.flatten
-import arrow.effects.instances.io.monad.monad
 
 fun mainIO(): IO<String> =
-    IO.monad().binding {
+    fx {
         first()
     second()
-    }.flatten()
+    }.unsafeRunSync()
 
 fun mainIO2(): IO<Any> =
-    binding {
+    fx {
         first()
     second()
     }.attempt().handleErrorWith { IO.just("Failed") }.fix()
@@ -20,7 +18,7 @@ fun mainIO2(): IO<Any> =
 fun first(): IO<String> = IO.just("first called")
 fun second(): IO<String> = IO.just("second called")
 
-fun main() {
+private fun main() {
     println(mainIO().unsafeRunSync())
     println(mainIO2().unsafeRunSync())
 }

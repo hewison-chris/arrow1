@@ -2,7 +2,7 @@ import java.security.SecureRandom
 
 private val random = SecureRandom()
 
-fun main() {
+private fun main() {
     println("What is your name?")
     val name: String = readLine() ?: "anonymous"
     println("Hello, $name, welcome to the game!")

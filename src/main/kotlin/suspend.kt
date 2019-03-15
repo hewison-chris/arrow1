@@ -4,7 +4,7 @@ suspend fun sayHello(): Unit =
 suspend fun sayGoodBye(): Unit =
     println("Good bye World!")
 
-suspend fun main() {
+private suspend fun main() {
     sayHello()
     sayGoodBye()
 }
