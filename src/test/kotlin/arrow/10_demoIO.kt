@@ -44,14 +44,17 @@ object IOTests {
                 divide(
                     2,
                     1
-                ).also { println("2) inside deferAttempt: $it") } // Expected this to print before unsafeRunSync - oh well
+                ).also { println("2) inside deferAttempt: $it") }
             }.attempt()
         println("1) First output")
         assertEquals(
             2,
             deferAttempt.also { println("Just before unsafeRunSync()") }
-                .unsafeRunSync()
-                .fold({ 0 }, { it.getOrElse { -1 } })
+                .unsafeRunSync().also { println("Just after unsafeRunSync()") }
+                .fold(
+                    { 0.also { println(" Was Left") } },
+                    { it.getOrElse { -1 }.also { println(" Was Right") } }
+                )
         )
     }
 

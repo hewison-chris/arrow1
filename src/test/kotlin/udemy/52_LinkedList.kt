@@ -3,6 +3,7 @@ package udemy
 import org.testng.annotations.Test
 import kotlin.test.assertEquals
 
+// Implementing a generic FP Linked List in Kotlin
 sealed class LinkedList<out T : Any>
 
 data class Cons<T : Any>(
